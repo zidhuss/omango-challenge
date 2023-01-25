@@ -14,6 +14,7 @@ func Solve(number int) bool {
 		return true
 	}
 
+	//find the square of the number
 	numberSquared := fmt.Sprintf("%d", int(math.Pow(float64(number), 2)))
 
 	for i := 0; i < len(numberSquared)-1; i++ {
