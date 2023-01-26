@@ -1,33 +1,35 @@
 package main
 
 import (
+	"fmt"
 	"strconv"
 )
 
-// Solve returns true if the number is a K number
-func Solve(number int) bool {
-	n := number * number
-	if n < 10 {
-		return true
+func main() {
+	//printing all K number under 1,000,000
+	for i := 0; i < 1000000; i++ {
+		if Solve(i) {
+			fmt.Println(i)
+		}
 	}
+}
 
-	s := strconv.Itoa(n)
-	for i := 1; i < len(s); i++ {
-		x, _ := strconv.Atoi(s[0:i])
-		y, _ := strconv.Atoi(s[i:])
-
-		if x > number {
-			return false
-		}
-
-		if y == 0 || y > number {
-			continue
-		}
-
-		if x+y == number {
+//better performance only max of 3 checks for a number :)
+func Solve(n int) bool {
+	l := len(strconv.Itoa(n))
+	s := strconv.Itoa(n * n)
+	for i := max(l-2, 0); i <= l; i++ {
+		a, _ := strconv.Atoi(s[0:i])
+		b, _ := strconv.Atoi(s[i:])
+		if b != 0 && a+b == n {
 			return true
 		}
 	}
-
 	return false
+}
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
